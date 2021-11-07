@@ -1,7 +1,10 @@
 package com.AddressBook;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class ContactStore extends AddressBook {
     Scanner scanner = new Scanner(System.in);
@@ -103,5 +106,15 @@ public class ContactStore extends AddressBook {
                 check = true;
         }
         return check;
+    }
+
+    public static void search(Hashtable<Integer, ArrayList<ContactStore>> dictionary){
+        System.out.println("Enter state name");
+        Scanner scanner = new Scanner(System.in);
+        String state = scanner.nextLine();
+        for (int i = 1; i <= dictionary.size(); i++){
+            List<ContactStore> person = dictionary.get(i).stream().filter(s -> s.getState().equalsIgnoreCase(state)).collect(Collectors.toList());
+            System.out.println(person);
+        }
     }
 }
