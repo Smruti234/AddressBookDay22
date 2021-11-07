@@ -15,14 +15,14 @@ public class ContactStore {
         contactList.add(contact);
     }
 
-   public void edit() {
+    void edit() {
         System.out.println("Enter name of contact you want to sell");
         String name = scanner.nextLine();
         for (AddressBook addressBook : contactList) {
             if (addressBook.getFirstName().equalsIgnoreCase(name)) {
                 boolean check = true;
                 while (check) {
-                    System.out.println("Edit Options 1.firstName 2.lastName 3.address 4.city 5.state 6.zip 7.phoneNumber 8.email 9.exit");
+                    System.out.println("Edit Options 1.firstName 2.lastName 3.address 4.city 5.state 6.zip 7.phonenumber 8.email 9.exit");
                     int choice = scanner.nextInt();
                     scanner.nextLine();
                     switch (choice) {
@@ -69,6 +69,15 @@ public class ContactStore {
                         default -> check = false;
                     }
                 }
+            }
+        }
+    }
+    public void remove() {
+        System.out.println("Enter name of contact you want to sell");
+        String name = scanner.nextLine();
+        for (int i = 0; i < contactList.size(); i++) {
+            if (contactList.get(i).getFirstName().equalsIgnoreCase(name)) {
+                contactList.remove(contactList.get(i));
             }
         }
     }
