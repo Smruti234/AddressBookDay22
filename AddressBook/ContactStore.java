@@ -108,21 +108,30 @@ public class ContactStore extends AddressBook {
         return check;
     }
 
-    public static void search(Hashtable<Integer, ArrayList<ContactStore>> dictionary) {
+    public static void search(Hashtable<Integer, ArrayList<ContactStore>> dictionary){
         System.out.println("Enter state name");
         Scanner scanner = new Scanner(System.in);
         String state = scanner.nextLine();
         System.out.println("Enter city name");
         String city = scanner.nextLine();
+        long count1 = 0;
+        long count2 = 0;
         System.out.println("Persons with State name :" + state);
         for (int i = 1; i <= dictionary.size(); i++) {
             List<ContactStore> personWithState = dictionary.get(i).stream().filter(s -> s.getState().equalsIgnoreCase(state)).collect(Collectors.toList());
             System.out.println(personWithState);
+            long count = dictionary.get(i).stream().filter(s -> s.getState().equalsIgnoreCase(state)).count();
+            count1 = count1 + count;
         }
+        System.out.println(count1);
+        System.out.println("No.of Persons in State " + state + " are " + count1);
         System.out.println("Persons with City name :" + city);
-        for (int i = 1; i <= dictionary.size(); i++) {
+        for (int i = 1; i <= dictionary.size(); i++){
             List<ContactStore> personWithCity = dictionary.get(i).stream().filter(c -> c.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
             System.out.println(personWithCity);
+            long count = dictionary.get(i).stream().filter(c -> c.getCity().equalsIgnoreCase(city)).count();
+            count2 = count2 + count;
         }
+        System.out.println("No.of persons in City " + city + " are " + count2);
     }
 }
