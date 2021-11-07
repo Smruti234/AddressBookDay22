@@ -4,59 +4,34 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBookMain {
-    public static String userInput() {
-        Scanner sc = new Scanner(System.in);
-        String st = sc.nextLine();
-        return st;
-    }
     public static void main(String[] args) {
-        System.out.println("Welcome to Address Book Program");
-        ArrayList<String> addressList = new ArrayList<>();
-
-        Person_Details personOne = new Person_Details();
-        System.out.println("Please Enter the Name :");
-        personOne.setFirstName(userInput());
-        System.out.println("Please Enter Last Name : ");
-        personOne.setLastName(userInput());
-        System.out.println("Please Enter Address : ");
-        personOne.setAddress(userInput());
-        System.out.println("Please Enter City : ");
-        personOne.setCity(userInput());
-        System.out.println("Please Enter State : ");
-        personOne.setState(userInput());
-        System.out.println("Please Enter Zip Code : ");
-        personOne.setZipCode(userInput());
-        System.out.println("Please Enter Phone Number : ");
-        personOne.setPhoneNumber(userInput());
-        System.out.println("Please Enter Email : ");
-        personOne.setEmail(userInput());
-        System.out.println(personOne);
-
-        System.out.println("Enter the Second Person Details");
-
-        Person_Details personTwo = new Person_Details();
-        System.out.println("Please Enter the Name :");
-        personTwo.setFirstName(userInput());
-        System.out.println("Please Enter Last Name : ");
-        personTwo.setLastName(userInput());
-        System.out.println("Please Enter Address : ");
-        personTwo.setAddress(userInput());
-        System.out.println("Please Enter City : ");
-        personTwo.setCity(userInput());
-        System.out.println("Please Enter State : ");
-        personTwo.setState(userInput());
-        System.out.println("Please Enter Zip Code : ");
-        personTwo.setZipCode(userInput());
-        System.out.println("Please Enter Phone Number : ");
-        personTwo.setPhoneNumber(userInput());
-        System.out.println("Please Enter Email : ");
-        personTwo.setEmail(userInput());
-        System.out.println(personTwo);
-
+        AddressBook contact = new AddressBook();
+        ContactStore contactStore = new ContactStore();
+        UserInterface userInterface = new UserInterface();
+        Scanner scanner = new Scanner(System.in);
+        boolean check = true;
+        while (check) {
+            System.out.println("Enter choice 1.Add the new contact\n 2.Edit Existing contact\n 3.exit");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            switch (choice) {
+                case 1 -> {
+                    AddressBook newContact = new AddressBook();
+                    userInterface.enterDetails(newContact);
+                    contactStore.add(newContact);
+                    System.out.println("Contact List after add");
+                    userInterface.print(contactStore.getContactList());
+                }
+                case 2 -> {
+                    contactStore.edit();
+                    System.out.println("Contact List after edit");
+                    userInterface.print(contactStore.getContactList());
+                }
+                case 3 ->
+                        check = false;
+            }
+        }
     }
 }
-
-
-
 
 

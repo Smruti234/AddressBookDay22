@@ -1,6 +1,6 @@
 package com.AddressBook;
 
-public class Person_Details {
+public class AddressBook {
     private String firstName;
     private String lastName;
     private String address;
