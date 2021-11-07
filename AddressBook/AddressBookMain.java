@@ -6,7 +6,7 @@ import java.util.Hashtable;
 import java.util.Scanner;
 
 public class AddressBookMain {
-    static Hashtable<Integer, ArrayList<ContactStore>> dictionary  = new Hashtable<>();
+    static Hashtable<Integer, ArrayList<ContactStore>> dictionary = new Hashtable<>();
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class AddressBookMain {
                     case 1 -> {
                         contactStore.setContactDetails();
                         boolean checkDuplicate = contactStore.searchForDuplication(arrayList, contactStore);
-                        if(!checkDuplicate)
+                        if (!checkDuplicate)
                             arrayList.add(contactStore);
                         else
                             System.out.println("Contact already Exists");
@@ -39,5 +39,11 @@ public class AddressBookMain {
         }
         System.out.println(dictionary);
         ContactStore.search(dictionary);
+        System.out.println("AddressBooks after Sorting based on FirstName:");
+        ContactStore.sortByFirstName(dictionary);
+        System.out.println("AddressBooks Sorted based on City :");
+        ContactStore.sortByCity(dictionary);
+        System.out.println("AddressBooks Sorted based on State :");
+        ContactStore.sortByState(dictionary);
     }
 }
