@@ -3,83 +3,105 @@ package com.AddressBook;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ContactStore {
-    private ArrayList<AddressBook> contactList = new ArrayList<>();
+public class ContactStore extends AddressBook {
     Scanner scanner = new Scanner(System.in);
 
-    public ArrayList<AddressBook> getContactList() {
-        return contactList;
+    public void setContactDetails() {
+        System.out.println("enter the First Name");
+        setFirstName(scanner.nextLine());
+        System.out.println("enter the Last Name");
+        setLastName(scanner.nextLine());
+        System.out.println("enter the Address Name");
+        setAddress(scanner.nextLine());
+        System.out.println("Enter city");
+        setCity(scanner.nextLine());
+        System.out.println("enter the State Name");
+        setState(scanner.nextLine());
+        System.out.println("enter the Phone Number");
+        setPhoneNumber(scanner.nextLine());
+        System.out.println("enter the ZipCode");
+        setZipCode(scanner.nextLine());
+        System.out.println("enter the Email");
+        setEmail(scanner.nextLine());
     }
 
-    public void add(AddressBook contact) {
-        contactList.add(contact);
-    }
-
-   public void edit() {
-        System.out.println("Enter name of contact you want to sell");
+    public void editDetails(ArrayList<ContactStore> contact) {
+        System.out.println("Enter the name to edit");
         String name = scanner.nextLine();
-        for (AddressBook addressBook : contactList) {
-            if (addressBook.getFirstName().equalsIgnoreCase(name)) {
+        for (int i = 0; i < contact.size(); i++) {
+            if (contact.get(i).getFirstName().equals(name)) {
                 boolean check = true;
                 while (check) {
-                    System.out.println("Edit Options 1.firstName\n 2.lastName\n 3.address\n 4.city\n 5.state\n 6.zip\n 7.phonenumber\n 8.email\n 9.exit");
+                    System.out.printf("enter 1.First Name\n 2.Last Name\n 3.Address\n 4.City\n 5.State\n 6.PhoneNumber\n 7.PinCode\n 8.Email\n 9.Exit");
                     int choice = scanner.nextInt();
                     scanner.nextLine();
                     switch (choice) {
-                        case 1 -> {
-                            System.out.println("Enter your new firstName :");
+                        case 1:
+                            System.out.println("enter new first name");
                             String firstName = scanner.nextLine();
-                            addressBook.setFirstName(firstName);
-                        }
-                        case 2 -> {
-                            System.out.println("Enter your new lastName : ");
+                            contact.get(i).setFirstName(firstName);
+                            break;
+                        case 2:
+                            System.out.println("enter the new Last name");
                             String lastName = scanner.nextLine();
-                            addressBook.setLastName(lastName);
-                        }
-                        case 3 -> {
-                            System.out.println("Enter your new address :");
+                            contact.get(i).setLastName(lastName);
+                            break;
+                        case 3:
+                            System.out.println("enter new Address");
                             String address = scanner.nextLine();
-                            addressBook.setAddress(address);
-                        }
-                        case 4 -> {
-                            System.out.println("Enter your new city : ");
+                            contact.get(i).setAddress(address);
+                            break;
+                        case 4:
+                            System.out.println("enter new City");
                             String city = scanner.nextLine();
-                            addressBook.setCity(city);
-                        }
-                        case 5 -> {
-                            System.out.println("Enter your new state :");
+                            contact.get(i).setCity(city);
+                            break;
+                        case 5:
+                            System.out.println("enter new State");
                             String state = scanner.nextLine();
-                            addressBook.setCity(state);
-                        }
-                        case 6 -> {
-                            System.out.println("Enter your new zip : ");
-                            String zip = scanner.nextLine();
-                            addressBook.setZipCode(zip);
-                        }
-                        case 7 -> {
-                            System.out.println("Enter your new phoneNumber :");
+                            contact.get(i).setState(state);
+                            break;
+                        case 6:
+                            System.out.println("enter new PhoneNumber");
                             String phoneNumber = scanner.nextLine();
-                            addressBook.setPhoneNumber(phoneNumber);
-                        }
-                        case 8 -> {
-                            System.out.println("Enter your new email : ");
+                            contact.get(i).setPhoneNumber(phoneNumber);
+                            break;
+                        case 7:
+                            System.out.println("enter new PinCode");
+                            String pin = scanner.nextLine();
+                            contact.get(i).setZipCode(pin);
+                            break;
+                        case 8:
+                            System.out.println("enter new Email");
                             String email = scanner.nextLine();
-                            addressBook.setEmail(email);
-                        }
-                        default -> check = false;
+                            contact.get(i).setEmail(email);
+                            break;
+                        case 9:
+                            check = false;
                     }
                 }
+
+            } else
+                System.out.println("Your name is not matched");
+        }
+    }
+
+    public void deleteDetails(ArrayList<ContactStore> contact) {
+        System.out.println("enter the name");
+        String name = scanner.nextLine();
+        for (int i = 0; i < contact.size(); i++) {
+            if (contact.get(i).getFirstName().equals(name)) {
+                contact.remove(i);
             }
         }
     }
 
-    public void remove() {
-        System.out.println("Enter name of contact you want to sell");
-        String name = scanner.nextLine();
-        for (int i = 0; i < contactList.size(); i++) {
-            if (contactList.get(i).getFirstName().equalsIgnoreCase(name)) {
-                contactList.remove(contactList.get(i));
-            }
+    public boolean searchForDuplication(ArrayList<ContactStore> contactStores, ContactStore contact) {
+        boolean check = false;
+        for (ContactStore contactStore : contactStores) {
+            if (contact.getFirstName().equalsIgnoreCase(contactStore.getFirstName()))
+                check = true;
         }
+        return check;
     }
 }
