@@ -39,5 +39,7 @@ public class AddressBookMain {
         }
         System.out.println(dictionary);
         ContactStore.search(dictionary);
+        System.out.println("AddressBooks after Sorting :");
+        ContactStore.sort(dictionary);
     }
 }
